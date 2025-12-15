@@ -9,7 +9,7 @@ function EducationTimeline() {
       duration: 'Expected May 2028',
       location: 'Dhanbad, Jharkhand',
       coursework: ['Introduction to C', 'Data Structures and Algorithms (C++)', 'Operating Systems', 'Object Oriented Programming'],
-      description: 'Pursuing a rigorous curriculum that perfectly balances the theoretical depth of mathematics with the practical applications of computer science. The program emphasizes algorithmic thinking, computational efficiency, and modern software development practices. Beyond academics, I actively contribute to Mallor Daemon, the official student media body, where I work on institute-level platforms and collaborate with talented peers on technical projects.',
+      description: 'Pursuing a rigorous curriculum that perfectly balances the theoretical depth of mathematics with the practical applications of computer science. The program emphasizes algorithmic thinking, computational efficiency, and modern software development practices. Beyond academics, I collaborate with talented peers on technical projects and contribute to institute-level platforms.',
       current: true
     },
     {
@@ -63,9 +63,8 @@ function EducationTimeline() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className={`relative flex items-center ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
+                className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  }`}
               >
                 {/* Timeline Dot */}
                 <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-6 h-6 bg-cyan-500 border-4 border-white z-10"></div>
@@ -78,11 +77,11 @@ function EducationTimeline() {
                         Current
                       </span>
                     )}
-                    
+
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">
                       {item.institution}
                     </h3>
-                    
+
                     <p className="text-lg font-bold text-cyan-600 mb-4">
                       {item.degree}
                     </p>
@@ -92,12 +91,12 @@ function EducationTimeline() {
                         <FiCalendar className="w-4 h-4" />
                         <span className="text-sm font-medium">{item.duration}</span>
                       </div>
-                      
+
                       <div className="flex items-center gap-2 text-gray-600">
                         <FiMapPin className="w-4 h-4" />
                         <span className="text-sm font-medium">{item.location}</span>
                       </div>
-                      
+
                       {(item.gpa || item.percentage) && (
                         <div className="flex items-center gap-2 text-gray-600">
                           <FiAward className="w-4 h-4" />

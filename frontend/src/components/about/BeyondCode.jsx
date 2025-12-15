@@ -12,8 +12,8 @@ function BeyondCode() {
     {
       icon: FiUsers,
       title: 'Student Leadership & Community',
-      description: 'As a member of the Development Division in Mallor Daemon, the official student media body of IIT(ISM) Dhanbad, I contribute to building institute-level platforms like Placementor. Working collaboratively with talented peers on technical projects has taught me the value of teamwork, code reviews, and shared learning. Being part of this community means contributing to something bigger than个人 projects—it\'s about building tools that benefit the entire student body.',
-      gradient:'from-purple-500 to-pink-500'
+      description: 'As a member of the Development Division in the official student media body of IIT(ISM) Dhanbad, I contribute to building institute-level platforms. Working collaboratively with talented peers on technical projects has taught me the value of teamwork, code reviews, and shared learning. Being part of this community means contributing to something bigger than personal projects—it\'s about building tools that benefit the entire student body.',
+      gradient: 'from-purple-500 to-pink-500'
     },
     {
       icon: FiTrendingUp,
@@ -63,7 +63,7 @@ function BeyondCode() {
                 className="bg-white border-2 border-gray-200 hover:border-cyan-500 transition-all duration-300"
               >
                 <div className={`h-2 bg-gradient-to-r ${interest.gradient}`}></div>
-                
+
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <div className={`w-12 h-12 bg-gradient-to-r ${interest.gradient} flex items-center justify-center`}>
@@ -73,7 +73,7 @@ function BeyondCode() {
                       {interest.title}
                     </h3>
                   </div>
-                  
+
                   <p className="text-gray-600 leading-relaxed font-medium">
                     {interest.description}
                   </p>

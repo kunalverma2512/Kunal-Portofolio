@@ -21,7 +21,7 @@ function MyStory() {
 
         <div className="prose prose-lg max-w-none">
           <motion.div
-            initial={{ opacity:  0, y: 20 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
@@ -48,7 +48,7 @@ function MyStory() {
             </p>
 
             <p className="font-medium">
-              Currently in my third year at IIT (ISM), I'm actively involved with <span className="font-bold text-gray-900">Mallor Daemon</span>, the official student media body of our institute, where I contribute to development initiatives. Participating in hackathons like <span className="font-bold text-purple-600">HackerFest'25</span> (where I secured 4th position) and <span className="font-bold text-gray-900">CodeRapido</span> keeps me sharp and pushes me to think on my feet. My goals are clear: continue building impactful projects that solve real problems, improve my problem-solving abilities, contribute to open-source communities, and leverage my mathematical background to create innovative tech solutions. I believe that the best code is written when you combine theoretical knowledge with practical application, and I'm excited to see where this journey takes me next.
+              Currently in my third year at IIT (ISM), I'm actively involved with the official student media body of our institute, where I contribute to development initiatives. Participating in hackathons like <span className="font-bold text-purple-600">HackerFest'25</span> (where I secured 4th position) and <span className="font-bold text-gray-900">CodeRapido</span> keeps me sharp and pushes me to think on my feet. My goals are clear: continue building impactful projects that solve real problems, improve my problem-solving abilities, contribute to open-source communities, and leverage my mathematical background to create innovative tech solutions. I believe that the best code is written when you combine theoretical knowledge with practical application, and I'm excited to see where this journey takes me next.
             </p>
           </motion.div>
 

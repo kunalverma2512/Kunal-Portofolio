@@ -16,7 +16,7 @@ function ValuesPhilosophy() {
     {
       icon: FiUsers,
       title: 'Collaboration Over Competition',
-      description: 'While competitive programming teaches individual skills and problem-solving, real-world projects thrive on teamwork. I value collaboration, knowledge sharing, and community contribution over individual glory. Working with teams during hackathons, contributing to Mallor Daemon, and engaging with the developer community has shown me that the best solutions emerge from diverse perspectives and collective effort.'
+      description: 'While competitive programming teaches individual skills and problem-solving, real-world projects thrive on teamwork. I value collaboration, knowledge sharing, and community contribution over individual glory. Working with teams during hackathons, contributing to student bodies, and engaging with the developer community has shown me that the best solutions emerge from diverse perspectives and collective effort.'
     },
     {
       icon: FiTarget,
@@ -62,7 +62,7 @@ function ValuesPhilosophy() {
                   <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center flex-shrink-0">
                     <Icon className="w-8 h-8 text-white" />
                   </div>
-                  
+
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-4">
                       {value.title}

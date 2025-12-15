@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import connectDB from './config/mongodb.js'
 import contactRoutes from './routes/contact.routes.js'
+import newsletterRoutes from './routes/newsletter.routes.js'
 
 // Load environment variables
 dotenv.config()
@@ -51,6 +52,7 @@ app.get('/api/health', (req, res) => {
 
 // API Routes
 app.use('/api/contact', contactRoutes)
+app.use('/api/newsletter', newsletterRoutes)
 
 // 404 handler
 app.use((req, res, next) => {
