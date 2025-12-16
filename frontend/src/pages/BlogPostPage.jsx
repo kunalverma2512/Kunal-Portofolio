@@ -6,7 +6,7 @@ import {
 } from 'react-icons/fi'
 import { blogPosts } from '../data/blogPosts'
 import { useEffect, useState } from 'react'
-import { subscribeToNewsletter } from '../utils/newsletter'
+import { subscribeToNewsletter } from '../utils/api'
 
 function BlogPostPage() {
   const { slug } = useParams()

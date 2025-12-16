@@ -5,7 +5,7 @@ import { TypeAnimation } from 'react-type-animation'
 import BlogCard from '../components/blog/BlogCard'
 import BlogFilters from '../components/blog/BlogFilters'
 import { blogPosts } from '../data/blogPosts'
-import { subscribeToNewsletter } from '../utils/newsletter'
+import { subscribeToNewsletter } from '../utils/api'
 
 function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState('All Posts')

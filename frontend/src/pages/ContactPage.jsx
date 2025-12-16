@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { submitContactForm } from '../utils/api'
 import { motion } from 'framer-motion'
 import {
   FiMail,
@@ -159,40 +160,13 @@ function ContactPage() {
     setErrors({}) // Clear previous errors
 
     try {
-      // Filter out empty fields to avoid backend validation errors (regex matching empty strings)
+      // Filter out empty fields to avoid backend validation errors
       const payload = Object.fromEntries(
         Object.entries(formData).filter(([_, value]) => value !== '' && value !== null)
       )
 
-      const response = await fetch('http://localhost:8080/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload)
-      })
-
-      const data = await response.json()
-
-      console.log('API Response:', data) // Debug log
-      console.log('Validation Errors:', data.errors) // Show errors array
-
-      if (!response.ok) {
-        // Handle validation errors from backend
-        if (data.errors && Array.isArray(data.errors)) {
-          console.log('Processing validation errors:', data.errors)
-          const backendErrors = {}
-          data.errors.forEach(error => {
-            console.log(`Field: ${error.field}, Message: ${error.message}`)
-            backendErrors[error.field] = error.message
-          })
-          setErrors(backendErrors)
-          setSubmitStatus('error')
-        } else {
-          throw new Error(data.message || 'Failed to submit form')
-        }
-        return
-      }
+      // Use the centralized API utility
+      await submitContactForm(payload)
 
       setSubmitStatus('success')
       setFormData({
@@ -215,6 +189,16 @@ function ContactPage() {
 
     } catch (error) {
       console.error('Submit error:', error)
+
+      // Handle validation errors from backend
+      if (error.data && error.data.errors && Array.isArray(error.data.errors)) {
+        const backendErrors = {}
+        error.data.errors.forEach(err => {
+          backendErrors[err.field] = err.message
+        })
+        setErrors(backendErrors)
+      }
+
       setSubmitStatus('error')
 
       // Reset error status after 5 seconds
