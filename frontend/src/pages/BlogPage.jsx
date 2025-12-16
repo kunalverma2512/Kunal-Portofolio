@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiTrendingUp, FiBookOpen, FiZap } from 'react-icons/fi'
+import { FiTrendingUp, FiBookOpen, FiZap, FiEdit3, FiLoader } from 'react-icons/fi'
 import { TypeAnimation } from 'react-type-animation'
 import BlogCard from '../components/blog/BlogCard'
 import BlogFilters from '../components/blog/BlogFilters'
@@ -97,72 +97,57 @@ function BlogPage() {
     setTimeout(() => setSubmitMessage({ type: '', text: '' }), 5000)
   }
 
-  /* const stats = [
-    { icon: FiBookOpen, label: 'Articles Published', value: '12+' },
-    { icon: FiTrendingUp, label: 'Total Reads', value: '15k+' },
-    { icon: FiZap, label: 'Topics Covered', value: '6' }
-  ] */
-
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-black border-b-4 border-red-600 py-12 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <motion.p
+      <section className="relative min-h-[50vh] flex items-center justify-center bg-red-600 overflow-hidden pt-32 pb-20">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:14px_24px] md:bg-[size:24px_24px]"></div>
+
+        {/* Abstract Shapes */}
+        <div className="absolute top-1/4 left-10 w-64 h-64 bg-white/10 rounded-full blur-[100px] pointer-events-none animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-10 w-64 h-64 bg-amber-400/20 rounded-full blur-[100px] pointer-events-none animate-pulse delay-700"></div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-sm font-bold tracking-widest uppercase text-red-600 mb-4"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white text-xs font-bold tracking-widest uppercase mb-8 border border-white/20 backdrop-blur-sm"
           >
-            Tech Blog
-          </motion.p>
+            <FiEdit3 className="w-4 h-4" />
+            Engineering Blog
+          </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold text-white mb-6"
+            className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight"
           >
-            Code, Learn, Share
+            Code, Learn, <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-red-100">Share</span>
           </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium mb-8"
-          >
-            Exploring web development, AI/ML, competitive programming, and everything in between.
-            Sharing my journey, tutorials, and insights from building real-world projects.
-          </motion.p>
-
-          {/* Stats replaced with Typewriter */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className={`text-3xl md:text-5xl lg:text-6xl font-black h-32 md:h-40 ${textColor} transition-colors duration-300`}
+            transition={{ delay: 0.2 }}
+            className="text-2xl md:text-5xl font-bold text-white/90 h-32 leading-tight"
           >
             <TypeAnimation
               sequence={[
-                () => setTextColor('text-sky-500'),
                 'I write about Web Development.',
                 1000,
-                () => setTextColor('text-emerald-500'),
                 'I share my learning journey.',
                 1000,
-                () => setTextColor('text-purple-500'),
                 'I explore AI and Machine Learning.',
                 1000,
-                () => setTextColor('text-amber-500'),
-                'competitive programming.',
-                1000,
-                () => setTextColor('text-rose-500'),
-                'I build open source projects.',
+                'I solve competitive programming.',
                 1000,
               ]}
               wrapper="span"
               speed={50}
               repeat={Infinity}
+              className="text-white drop-shadow-md"
             />
           </motion.div>
         </div>
@@ -178,15 +163,14 @@ function BlogPage() {
       />
 
       {/* Main Content */}
-      <div className="py-12 px-6">
+      <div className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           {/* Results Info */}
-          <div className="mb-8">
-            <p className="text-gray-600 font-medium">
+          <div className="mb-12 flex items-center justify-between border-b border-gray-200 pb-4">
+            <p className="text-gray-500 font-medium">
               {searchQuery ? (
                 <>
-                  Found <span className="font-bold text-gray-900">{filteredPosts.length}</span> results for "
-                  <span className="font-bold text-red-600">{searchQuery}</span>"
+                  Found <span className="font-bold text-gray-900">{filteredPosts.length}</span> results
                 </>
               ) : (
                 <>
@@ -201,24 +185,23 @@ function BlogPage() {
 
           {/* Featured Post */}
           {featuredPost && !searchQuery && selectedCategory === 'All Posts' && (
-            <div className="mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-                <span className="w-2 h-8 bg-gradient-to-b from-red-600 to-red-500"></span>
-                Featured Article
+            <div className="mb-24">
+              <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-8 flex items-center gap-4">
+                <span className="w-8 h-[2px] bg-red-500"></span>
+                Featured Story
               </h2>
               <BlogCard post={featuredPost} featured={true} />
             </div>
           )}
 
           {/* Recent Posts Grid */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-              <span className="w-2 h-8 bg-gradient-to-b from-purple-500 to-pink-500"></span>
+          <div className="mb-24">
+            <h2 className="text-3xl font-black text-gray-900 mb-12 flex items-center gap-3">
               {searchQuery ? 'Search Results' : selectedCategory === 'All Posts' ? 'Latest Articles' : `${selectedCategory} Articles`}
             </h2>
 
             {filteredPosts.filter(post => !post.featured || searchQuery || selectedCategory !== 'All Posts').length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
                 {filteredPosts
                   .filter(post => !post.featured || searchQuery || selectedCategory !== 'All Posts')
                   .map(post => (
@@ -226,10 +209,10 @@ function BlogPage() {
                   ))}
               </div>
             ) : (
-              <div className="text-center py-20">
-                <div className="text-6xl mb-4">📝</div>
+              <div className="text-center py-24 bg-white rounded-3xl border border-gray-100 shadow-sm">
+                <div className="text-6xl mb-6">🔍</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">No articles found</h3>
-                <p className="text-gray-600 font-medium">
+                <p className="text-gray-500">
                   Try adjusting your filters or search query
                 </p>
               </div>
@@ -241,47 +224,59 @@ function BlogPage() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-red-600 to-red-500 p-12 text-center"
+            className="relative overflow-hidden bg-red-600 rounded-3xl p-12 md:p-20 text-center shadow-2xl shadow-red-600/20"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Stay Updated
-            </h2>
-            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-              Get notified when I publish new articles about web development, AI/ML, and competitive programming.
-            </p>
-            <form onSubmit={handleSubscribe} className="max-w-md mx-auto">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  disabled={isSubmitting}
-                  className="flex-1 px-6 py-4 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 focus:border-white focus:outline-none font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-8 py-4 bg-white text-red-600 font-bold hover:bg-gray-100 transition-colors border-b-4 border-white/30 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? 'Subscribing...' : 'Subscribe'}
-                </button>
+            {/* Background Glows */}
+            <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-[80px]"></div>
+            <div className="absolute bottom-0 right-0 w-64 h-64 bg-amber-500/20 rounded-full blur-[80px]"></div>
+
+            <div className="relative z-10 max-w-2xl mx-auto">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 border border-white/20 mb-8 text-white backdrop-blur-sm shadow-inner">
+                <FiZap className="w-8 h-8 text-white" />
               </div>
 
-              {/* Success/Error Message */}
-              {submitMessage.text && (
-                <motion.p
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`mt-4 text-sm font-semibold ${submitMessage.type === 'success'
-                      ? 'text-green-100'
-                      : 'text-yellow-200'
-                    }`}
-                >
-                  {submitMessage.text}
-                </motion.p>
-              )}
-            </form>
+              <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
+                Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-red-100">Newsletter</span>
+              </h2>
+
+              <p className="text-lg text-white/90 mb-10 leading-relaxed font-medium">
+                Get notified when I publish new articles about web development, AI/ML, and competitive programming. No spam, ever.
+              </p>
+
+              <form onSubmit={handleSubscribe} className="max-w-md mx-auto">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    disabled={isSubmitting}
+                    className="flex-1 px-6 py-4 rounded-xl border border-transparent bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-white/25 transition-all font-medium shadow-lg"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="px-8 py-4 bg-gray-900 text-white font-bold rounded-xl hover:bg-black transition-colors shadow-lg disabled:opacity-50 flex items-center justify-center min-w-[140px]"
+                  >
+                    {isSubmitting ? <FiLoader className="w-5 h-5 animate-spin" /> : 'Subscribe'}
+                  </button>
+                </div>
+
+                {/* Success/Error Message */}
+                {submitMessage.text && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`mt-6 text-sm font-bold ${submitMessage.type === 'success'
+                      ? 'text-white'
+                      : 'text-white'
+                      } bg-black/20 inline-block px-4 py-2 rounded-lg backdrop-blur-sm`}
+                  >
+                    {submitMessage.text}
+                  </motion.p>
+                )}
+              </form>
+            </div>
           </motion.div>
         </div>
       </div>

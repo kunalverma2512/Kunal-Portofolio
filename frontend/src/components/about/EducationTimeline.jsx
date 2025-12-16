@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FiMapPin, FiCalendar, FiAward } from 'react-icons/fi'
+import { FiMapPin, FiCalendar, FiAward, FiBook } from 'react-icons/fi'
 
 function EducationTimeline() {
   const education = [
@@ -33,29 +33,33 @@ function EducationTimeline() {
   ]
 
   return (
-    <section className="bg-gray-50 py-20 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-gray-50 py-24 px-6 relative overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-1/2 left-0 w-full h-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <p className="text-sm font-bold tracking-widest uppercase text-cyan-500 mb-4">
-            Education
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
-            Educational Background
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-600 text-xs font-bold tracking-widest uppercase mb-4">
+            <FiBook className="w-4 h-4" />
+            Academic Career
+          </div>
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">
+            Education Timeline
           </h2>
         </motion.div>
 
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-0 md:left-1/2 transform md:-translate-x-px top-0 bottom-0 w-1 bg-cyan-500"></div>
+          <div className="absolute left-0 md:left-1/2 transform md:-translate-x-px top-0 bottom-0 w-0.5 bg-gradient-to-b from-red-500 via-purple-500 to-transparent opacity-30"></div>
 
           {/* Timeline Items */}
-          <div className="space-y-12">
+          <div className="space-y-16">
             {education.map((item, index) => (
               <motion.div
                 key={index}
@@ -63,44 +67,48 @@ function EducationTimeline() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                className={`relative flex flex-col md:flex-row items-center gap-8 md:gap-0 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                   }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-6 h-6 bg-cyan-500 border-4 border-white z-10"></div>
+                <div className="absolute left-[-5px] md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-white border-4 border-red-500 rounded-full z-10 shadow-[0_0_0_4px_rgba(239,68,68,0.2)]"></div>
 
                 {/* Content Card */}
-                <div className={`ml-12 md:ml-0 ${index % 2 === 0 ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'} md:w-1/2`}>
-                  <div className={`bg-white border-2 ${item.current ? 'border-cyan-500' : 'border-gray-200'} p-6 hover:border-cyan-500 transition-all duration-300 shadow-lg`}>
+                <div className={`w-full md:w-1/2 pl-8 md:pl-0 ${index % 2 === 0 ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'}`}>
+                  <div className={`relative bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group`}>
+
+                    {/* Corner Accent */}
+                    <div className={`absolute top-0 ${index % 2 === 0 ? 'md:right-0 md:rounded-tr-2xl' : 'md:left-0 md:rounded-tl-2xl'} right-0 rounded-tr-2xl w-20 h-20 bg-gradient-to-br from-red-50 to-transparent opacity-50`}></div>
+
                     {item.current && (
-                      <span className="inline-block px-3 py-1 bg-cyan-500 text-white text-xs font-bold tracking-wide uppercase mb-4">
-                        Current
+                      <span className="inline-block px-3 py-1 bg-red-100 text-red-600 text-[10px] font-bold tracking-widest uppercase mb-4 rounded-full">
+                        Currently Enrolled
                       </span>
                     )}
 
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
                       {item.institution}
                     </h3>
 
-                    <p className="text-lg font-bold text-cyan-600 mb-4">
+                    <p className="text-lg font-semibold text-gray-700 mb-6">
                       {item.degree}
                     </p>
 
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <FiCalendar className="w-4 h-4" />
-                        <span className="text-sm font-medium">{item.duration}</span>
+                    <div className={`flex flex-wrap gap-4 mb-6 text-sm text-gray-500 font-medium ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
+                      <div className="flex items-center gap-1.5">
+                        <FiCalendar className="w-4 h-4 text-red-500" />
+                        <span>{item.duration}</span>
                       </div>
 
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <FiMapPin className="w-4 h-4" />
-                        <span className="text-sm font-medium">{item.location}</span>
+                      <div className="flex items-center gap-1.5">
+                        <FiMapPin className="w-4 h-4 text-purple-500" />
+                        <span>{item.location}</span>
                       </div>
 
                       {(item.gpa || item.percentage) && (
-                        <div className="flex items-center gap-2 text-gray-600">
-                          <FiAward className="w-4 h-4" />
-                          <span className="text-sm font-medium">
+                        <div className="flex items-center gap-1.5">
+                          <FiAward className="w-4 h-4 text-amber-500" />
+                          <span className="text-gray-900 font-bold">
                             {item.gpa || item.percentage}
                           </span>
                         </div>
@@ -108,15 +116,12 @@ function EducationTimeline() {
                     </div>
 
                     {item.coursework && (
-                      <div className="mb-4">
-                        <p className="text-xs font-bold tracking-wide uppercase text-gray-700 mb-2">
-                          Relevant Coursework
-                        </p>
-                        <div className="flex flex-wrap gap-2">
+                      <div className="mb-6">
+                        <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'md:justify-end' : 'md:justify-start'}`}>
                           {item.coursework.map((course, courseIndex) => (
                             <span
                               key={courseIndex}
-                              className="px-3 py-1 bg-gray-100 border border-gray-300 text-xs font-medium text-gray-700"
+                              className="px-2.5 py-1 bg-gray-50 border border-gray-100 text-[11px] font-semibold text-gray-600 rounded-md"
                             >
                               {course}
                             </span>
@@ -125,7 +130,7 @@ function EducationTimeline() {
                       </div>
                     )}
 
-                    <p className="text-gray-600 leading-relaxed font-medium">
+                    <p className="text-gray-500 leading-relaxed font-normal text-sm">
                       {item.description}
                     </p>
                   </div>

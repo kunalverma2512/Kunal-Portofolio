@@ -32,78 +32,56 @@ function BlogFilters({ onSearch, onCategoryChange, onSortChange, selectedCategor
   }
 
   return (
-    <div className="bg-white border-b-2 border-gray-200 py-4 px-6 sticky top-0 z-40 shadow-sm">
+    <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-200 py-4 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Search Bar */}
-        <form onSubmit={handleSearch} className="mb-4">
-          <div className="relative max-w-2xl mx-auto">
-            <FiSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search articles by title, topic, or keyword..."
-              className="w-full pl-12 pr-12 py-3 border-2 border-gray-300 bg-white focus:border-red-600 focus:outline-none transition-colors font-medium text-gray-900"
-            />
-            {searchTerm && (
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+
+          {/* Categories - Desktop (Pills) */}
+          <div className="hidden md:flex flex-wrap gap-2 flex-1">
+            {categories.map((category, index) => (
               <button
-                type="button"
-                onClick={() => {
-                  setSearchTerm('')
-                  onSearch('')
-                }}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                key={index}
+                onClick={() => handleCategoryClick(category)}
+                className={`px-4 py-2 rounded-full font-bold text-sm transition-all duration-300 ${selectedCategory === category
+                    ? 'bg-gray-900 text-white shadow-lg transform scale-105'
+                    : 'bg-gray-50 text-gray-600 border border-gray-200 hover:bg-gray-100'
+                  }`}
               >
-                <FiX className="w-5 h-5" />
+                {category}
               </button>
-            )}
+            ))}
           </div>
-        </form>
 
-        {/* Filter Toggle (Mobile) */}
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className="md:hidden w-full flex items-center justify-center gap-2 px-4 py-3 border-2 border-gray-300 text-gray-900 font-bold mb-4"
-        >
-          <FiFilter className="w-5 h-5" />
-          {showFilters ? 'Hide Filters' : 'Show Filters'}
-        </button>
+          {/* Search Bar & Sort */}
+          <div className="w-full md:w-auto flex gap-3">
+            <form onSubmit={handleSearch} className="flex-1 md:w-64 relative group">
+              <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-red-600 transition-colors" />
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search articles..."
+                className="w-full pl-10 pr-10 py-2.5 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:border-red-600 focus:outline-none transition-all font-medium text-sm text-gray-900 shadow-sm"
+              />
+              {searchTerm && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm('')
+                    onSearch('')
+                  }}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-600"
+                >
+                  <FiX />
+                </button>
+              )}
+            </form>
 
-        {/* Filters */}
-        <div className={`${showFilters ? 'block' : 'hidden'} md:block`}>
-          <div className="flex flex-col md:flex-row gap-6">
-            {/* Categories */}
-            <div className="flex-1">
-              <label className="block text-sm font-bold tracking-wide uppercase text-gray-700 mb-3">
-                Categories
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {categories.map((category, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleCategoryClick(category)}
-                    className={`px-4 py-2 font-bold text-sm transition-all duration-300 ${
-                      selectedCategory === category
-                        ? 'bg-red-600 text-white border-2 border-red-600'
-                        : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-red-600'
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Sort */}
-            <div className="md:w-64">
-              <label htmlFor="sort" className="block text-sm font-bold tracking-wide uppercase text-gray-700 mb-3">
-                Sort By
-              </label>
+            <div className="relative">
               <select
-                id="sort"
                 value={selectedSort}
                 onChange={(e) => onSortChange(e.target.value)}
-                className="w-full px-4 py-3 border-2 border-gray-300 bg-white focus:border-red-600 focus:outline-none transition-colors font-bold text-gray-900"
+                className="appearance-none pl-4 pr-10 py-2.5 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:border-gray-400 focus:outline-none font-bold text-sm text-gray-700 cursor-pointer shadow-sm hover:bg-gray-100 transition-colors h-full"
               >
                 {sortOptions.map((option, index) => (
                   <option key={index} value={option.value}>
@@ -111,7 +89,28 @@ function BlogFilters({ onSearch, onCategoryChange, onSortChange, selectedCategor
                   </option>
                 ))}
               </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                <FiFilter className="w-3.5 h-3.5" />
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* Mobile Category Toggle */}
+        <div className="md:hidden mt-4">
+          <div className="flex overflow-x-auto pb-2 gap-2 hide-scrollbar">
+            {categories.map((category, index) => (
+              <button
+                key={index}
+                onClick={() => handleCategoryClick(category)}
+                className={`px-4 py-2 rounded-full font-bold text-xs whitespace-nowrap transition-all ${selectedCategory === category
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-gray-50 text-gray-600 border border-gray-200'
+                  }`}
+              >
+                {category}
+              </button>
+            ))}
           </div>
         </div>
       </div>

@@ -1,25 +1,28 @@
 import { motion } from 'framer-motion'
-import { FiGithub, FiExternalLink, FiUsers, FiZap, FiClock } from 'react-icons/fi'
+import { FiGithub, FiExternalLink, FiUsers, FiZap, FiClock, FiStar, FiChevronRight } from 'react-icons/fi'
 
 function FeaturedProjects() {
   return (
-    <section className="bg-gray-50 py-20 px-6">
+    <section className="bg-gray-50 py-24 px-6 relative overflow-hidden">
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <p className="text-sm font-bold tracking-widest uppercase text-cyan-500 mb-4">
-            Featured Projects
-          </p>
-          <h2 className="text-4xl md:t ext-5xl font-bold text-gray-900 tracking-tight mb-4">
-            Building Solutions to Real Problems
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-bold tracking-widest uppercase mb-4">
+            <FiStar className="w-4 h-4" />
+            Key Work
+          </div>
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-4">
+            Built to Solve
           </h2>
           <p className="text-lg text-gray-600 font-medium max-w-2xl mx-auto">
-            From hackathons to personal projects, here's what I've been building
+            From hackathon wins to deployed products, highlights from my engineering journey.
           </p>
         </motion.div>
 
@@ -29,100 +32,96 @@ function FeaturedProjects() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="mb-12 bg-white border-4 border-cyan-500 p-8 shadow-2xl"
+          className="mb-16 bg-white rounded-3xl overflow-hidden shadow-2xl border border-gray-100 group"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="px-4 py-2 bg-cyan-500 text-white text-xs font-bold tracking-wide uppercase">
-              Featured Project
-            </span>
-            <span className="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold tracking-wide uppercase">
-              Smart India Hackathon 2024
-            </span>
-          </div>
+          <div className="p-8 md:p-12 relative overflow-hidden">
+            {/* Detailed Background Decor */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-purple-50 rounded-full blur-3xl -mr-20 -mt-20 opacity-50 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-red-50 rounded-full blur-3xl -ml-20 -mb-20 opacity-50 pointer-events-none"></div>
 
-          <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Face Liveness Detection System
-          </h3>
-
-          <p className="text-lg text-cyan-600 font-bold mb-6">
-            AI/ML • Computer Vision • Web Development • Team Project
-          </p>
-
-          <div className="prose prose-lg max-w-none mb-8">
-            <p className="text-gray-600 leading-relaxed font-medium text-lg mb-4">
-              During Smart India Hackathon, I collaborated with a <span className="font-bold text-gray-900">6-member team</span> to build a sophisticated <span className="font-bold text-gray-900">browser-based face authentication system with liveness detection capabilities</span>. The challenge was to create a secure facial recognition system that could detect spoofing attempts and verify that a real person was present—not a photo or video.
-            </p>
-
-            <p className="text-gray-600 leading-relaxed font-medium text-lg mb-4">
-              I led the frontend development using <span className="font-bold text-gray-900">ReactJS</span>, integrating <span className="font-bold text-gray-900">MediaPipe</span> for accurate facial landmark detection in real-time. The system analyzes <span className="font-bold text-cyan-600">478 facial landmarks</span> and prompts users to perform specific actions—<span className="font-bold text-gray-900">blinking, turning their head, opening their mouth</span>—to verify liveness and prevent photo or video spoofing. This multi-step verification process ensures that the person in front of the camera is actually alive and present, not a static image or pre-recorded video.
-            </p>
-
-            <p className="text-gray-600 leading-relaxed font-medium text-lg mb-4">
-              One of the key technical challenges was ensuring seamless communication between the frontend and backend while maintaining response times <span className="font-bold text-cyan-600">under 2 seconds</span>. I implemented efficient data capture and transmission mechanisms, handling the flow of facial data and movement prompts smoothly without latency issues. The real-time nature of the system required careful optimization of data processing and network communication.
-            </p>
-
-            <p className="text-gray-600 leading-relaxed font-medium text-lg">
-              This project was a transformative learning experience. It taught me about real-world AI implementation, the importance of user experience in security systems, and the dynamics of collaborative development under tight deadlines. Working with MediaPipe opened my eyes to the power of computer vision libraries and their practical applications in authentication and security. Our team's effort was recognized with a <span className="font-bold text-purple-600">4th rank in the internal hackathon</span>, validating our technical approach and execution.
-            </p>
-          </div>
-
-          {/* Tech Stack */}
-          <div className="mb-6">
-            <h4 className="text-sm font-bold tracking-wide uppercase text-gray-700 mb-3">
-              Tech Stack
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {['ReactJS', 'MediaPipe', 'Facial Recognition', 'Real-time Processing', 'Browser APIs', 'Python Backend'].map((tech, index) => (
-                <span
-                  key={index}
-                  className="px-4 py-2 bg-gray-100 border-2 border-gray-300 text-sm font-bold text-gray-700"
-                >
-                  {tech}
+            <div className="relative z-10">
+              <div className="flex flex-wrap items-center gap-4 mb-8">
+                <span className="px-4 py-1.5 bg-red-600 text-white text-xs font-bold tracking-wider uppercase rounded-full shadow-lg shadow-red-500/30">
+                  Featured Project
                 </span>
-              ))}
-            </div>
-          </div>
+                <span className="px-4 py-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white text-xs font-bold tracking-wider uppercase rounded-full shadow-lg shadow-purple-500/30">
+                  Smart India Hackathon 2024
+                </span>
+              </div>
 
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <div className="border-2 border-gray-200 p-4 text-center">
-              <FiUsers className="w-6 h-6 text-cyan-500 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-cyan-600">6</div>
-              <div className="text-xs font-bold text-gray-600 uppercase">Team Members</div>
-            </div>
-            <div className="border-2 border-gray-200 p-4 text-center">
-              <FiClock className="w-6 h-6 text-purple-500 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-purple-600">&lt;2s</div>
-              <div className="text-xs font-bold text-gray-600 uppercase">Response Time</div>
-            </div>
-            <div className="border-2 border-gray-200 p-4 text-center">
-              <FiZap className="w-6 h-6 text-pink-500 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-pink-600">478</div>
-              <div className="text-xs font-bold text-gray-600 uppercase">Facial Landmarks</div>
-            </div>
-            <div className="border-2 border-gray-200 p-4 text-center">
-              <div className="text-4xl mb-2">🏆</div>
-              <div className="text-2xl font-bold text-orange-600">4th</div>
-              <div className="text-xs font-bold text-gray-600 uppercase">Rank Achieved</div>
-            </div>
-          </div>
+              <h3 className="text-3xl md:text-5xl font-black text-gray-900 mb-6 leading-tight">
+                Face Liveness <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-red-600">Detection System</span>
+              </h3>
 
-          {/* Links */}
-          <div className="flex gap-4">
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-500 text-white font-bold hover:bg-cyan-600 transition-colors"
-            >
-              <FiGithub className="w-5 h-5" />
-              View Code
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gray-300 text-gray-900 font-bold hover:border-cyan-500 transition-colors"
-            >
-              <FiExternalLink className="w-5 h-5" />
-              Case Study
-            </a>
+              <p className="text-lg md:text-xl text-gray-700 font-medium mb-8 max-w-4xl">
+                A sophisticated browser-based biometric authentication system designed to prevent identity spoofing. Built with a 6-member team, focusing on real-time processing and high-accuracy landmark detection.
+              </p>
+
+              <div className="prose prose-lg max-w-none mb-10 text-gray-600">
+                <p>
+                  I led the frontend development using <span className="font-bold text-gray-900">ReactJS</span>, integrating <span className="font-bold text-gray-900">MediaPipe</span> to analyze <span className="font-bold text-purple-600">478 facial landmarks</span>. The system prompts users to perform specific liveness checks (blinking, head turning) to verify physical presence, processing data in real-time.
+                </p>
+                <p>
+                  Key achievements included optimizing the capture pipeline to keep response times <span className="font-bold text-red-600">under 2 seconds</span> and designing an intuitive UI that guides users through the verification process.
+                </p>
+              </div>
+
+              {/* Metrics Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200">
+                  <FiUsers className="w-5 h-5 text-purple-600 mb-2" />
+                  <div className="text-2xl font-bold text-gray-900">6</div>
+                  <div className="text-xs font-bold text-gray-500 uppercase">Team Size</div>
+                </div>
+                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200">
+                  <FiClock className="w-5 h-5 text-red-600 mb-2" />
+                  <div className="text-2xl font-bold text-gray-900">&lt;2s</div>
+                  <div className="text-xs font-bold text-gray-500 uppercase">Latency</div>
+                </div>
+                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200">
+                  <FiZap className="w-5 h-5 text-amber-500 mb-2" />
+                  <div className="text-2xl font-bold text-gray-900">478</div>
+                  <div className="text-xs font-bold text-gray-500 uppercase">Landmarks</div>
+                </div>
+                <div className="bg-gray-50 rounded-2xl p-4 border border-gray-200">
+                  <div className="text-xl mb-1">🏆</div>
+                  <div className="text-2xl font-bold text-gray-900">4th</div>
+                  <div className="text-xs font-bold text-gray-500 uppercase">Rank</div>
+                </div>
+              </div>
+
+              {/* Tech Stack */}
+              <div className="mb-10">
+                <div className="flex flex-wrap gap-2">
+                  {['ReactJS', 'MediaPipe', 'Facial Recognition', 'Real-time Processing', 'Python Backend'].map((tech, index) => (
+                    <span
+                      key={index}
+                      className="px-3 py-1 bg-white border border-gray-200 text-xs font-bold text-gray-600 rounded-md"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Links */}
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white font-bold rounded-lg hover:bg-black transition-all hover:-translate-y-1 shadow-lg shadow-gray-900/20"
+                >
+                  <FiGithub className="w-5 h-5" />
+                  View Code
+                </a>
+                <a
+                  href="#"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-bold rounded-lg border border-gray-200 hover:border-gray-900 transition-all hover:-translate-y-1"
+                >
+                  <FiExternalLink className="w-5 h-5" />
+                  Case Study
+                </a>
+              </div>
+            </div>
           </div>
         </motion.div>
 
@@ -134,38 +133,42 @@ function FeaturedProjects() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="bg-white border-2 border-gray-200 hover:border-cyan-500 transition-all duration-300"
+            className="flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
           >
-            <div className="h-2 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
-            
-            <div className="p-6">
-              <span className="inline-block px-3 py-1 bg-gray-100 border-2 border-gray-300 text-xs font-bold uppercase mb-4">
-                Full-Stack Platform
-              </span>
+            <div className="h-2 bg-gradient-to-r from-red-500 to-amber-500"></div>
 
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                CodeClash
-              </h3>
+            <div className="p-8 flex-1 flex flex-col">
+              <div className="mb-6">
+                <span className="inline-block px-3 py-1 bg-red-50 text-red-600 text-[10px] font-bold tracking-widest uppercase rounded-full mb-4">
+                  Full-Stack Platform
+                </span>
 
-              <p className="text-gray-600 leading-relaxed mb-4 font-medium">
-                A full-stack platform I built to help competitive programmers track progress, practice problems, and get AI-powered insights. Using ReactJS and Tailwind CSS, I created an interface with 90%+ accessibility scores. The platform integrates with Codeforces API to fetch 10+ statistics per user and uses Gemini API for smart, AI-driven feedback and personalized recommendations.
-              </p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">
+                  CodeClash
+                </h3>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {['React', 'Tailwind', 'Node.js', 'Gemini API', '+2'].map((tech, index) => (
-                  <span key={index} className="px-3 py-1 bg-gray-50 border border-gray-300 text-xs font-bold text-gray-700">
-                    {tech}
-                  </span>
-                ))}
+                <p className="text-gray-600 leading-relaxed font-medium">
+                  A comprehensive platform for competitive programmers. Built with React and Node.js, it fetches real-time stats from Codeforces and uses Gemini AI to provide personalized practice recommendations and performance analysis.
+                </p>
               </div>
 
-              <div className="flex gap-4">
-                <a href="#" className="text-sm font-bold text-cyan-600 hover:text-cyan-700 flex items-center gap-2">
-                  <FiGithub /> Code
-                </a>
-                <a href="#" className="text-sm font-bold text-cyan-600 hover:text-cyan-700 flex items-center gap-2">
-                  <FiExternalLink /> Live
-                </a>
+              <div className="mt-auto">
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {['React', 'Node.js', 'Gemini API', 'MongoDB'].map((tech, index) => (
+                    <span key={index} className="px-2.5 py-1 bg-gray-50 text-gray-600 text-xs font-semibold rounded">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex gap-4 pt-6 border-t border-gray-100">
+                  <a href="#" className="flex items-center gap-2 text-sm font-bold text-gray-900 hover:text-red-600 transition-colors">
+                    <FiGithub className="w-4 h-4" /> Code
+                  </a>
+                  <a href="#" className="flex items-center gap-2 text-sm font-bold text-gray-900 hover:text-red-600 transition-colors">
+                    <FiExternalLink className="w-4 h-4" /> Live Demo
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -176,35 +179,39 @@ function FeaturedProjects() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="bg-white border-2 border-gray-200 hover:border-cyan-500 transition-all duration-300"
+            className="flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
           >
-            <div className="h-2 bg-gradient-to-r from-purple-500 to-pink-500"></div>
-            
-            <div className="p-6">
-              <span className="inline-block px-3 py-1 bg-gray-100 border-2 border-gray-300 text-xs font-bold uppercase mb-4">
-                RAG System
-              </span>
+            <div className="h-2 bg-gradient-to-r from-purple-500 to-indigo-500"></div>
 
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                Intelexa
-              </h3>
+            <div className="p-8 flex-1 flex flex-col">
+              <div className="mb-6">
+                <span className="inline-block px-3 py-1 bg-purple-50 text-purple-600 text-[10px] font-bold tracking-widest uppercase rounded-full mb-4">
+                  RAG System
+                </span>
 
-              <p className="text-gray-600 leading-relaxed mb-4 font-medium">
-                A RAG-powered system with LLM-powered Q&A capabilities. Multi-service architecture with Vite + React frontend, Node.js crawler, and Python backend (FastAPI + LangChain). Uses semantic embeddings via sentence-transformers and is fully containerized with Docker, orchestrating Python backend, Qdrant vector database, and Neo4j graph database.
-              </p>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors">
+                  Intelexa
+                </h3>
 
-              <div className="flex flex-wrap gap-2 mb-4">
-                {['React', 'LangChain', 'Qdrant', 'Docker', '+4'].map((tech, index) => (
-                  <span key={index} className="px-3 py-1 bg-gray-50 border border-gray-300 text-xs font-bold text-gray-700">
-                    {tech}
-                  </span>
-                ))}
+                <p className="text-gray-600 leading-relaxed font-medium">
+                  Advanced RAG-powered Q&A system. Features a microservices architecture with a Python/FastAPI backend using LangChain for orchestration, Qdrant for vector storage, and Neo4j for graph relationships.
+                </p>
               </div>
 
-              <div className="flex gap-4">
-                <a href="#" className="text-sm font-bold text-purple-600 hover:text-purple-700 flex items-center gap-2">
-                  <FiGithub /> Code
-                </a>
+              <div className="mt-auto">
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {['FastAPI', 'LangChain', 'Qdrant', 'Neo4j', 'Docker'].map((tech, index) => (
+                    <span key={index} className="px-2.5 py-1 bg-gray-50 text-gray-600 text-xs font-semibold rounded">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex gap-4 pt-6 border-t border-gray-100">
+                  <a href="#" className="flex items-center gap-2 text-sm font-bold text-gray-900 hover:text-purple-600 transition-colors">
+                    <FiGithub className="w-4 h-4" /> Code
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>

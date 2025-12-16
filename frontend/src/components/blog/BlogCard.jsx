@@ -2,120 +2,86 @@ import { motion } from 'framer-motion'
 import { FiClock, FiEye, FiCalendar, FiArrowRight, FiTag } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
-function BlogCard({ post, featured = false, variant = 'default' }) {
-  const getCategoryColor = (category) => {
-    const colors = {
-      'Web Development': 'from-red-600 to-red-500',
-      'AI/ML': 'from-purple-500 to-pink-500',
-      'Competitive Programming': 'from-red-500 to-indigo-500',
-      'Tutorial': 'from-green-500 to-emerald-500',
-      'Career': 'from-orange-500 to-red-500',
-      'Tech Talk': 'from-indigo-500 to-purple-500'
-    }
-    return colors[category] || 'from-gray-500 to-gray-700'
+// Helper for category colors
+const getCategoryColor = (category) => {
+  const colors = {
+    'Development': 'from-blue-600 to-cyan-500',
+    'Design': 'from-purple-600 to-pink-500',
+    'AI & ML': 'from-emerald-600 to-teal-500',
+    'Career': 'from-amber-500 to-orange-500',
+    'Tutorial': 'from-red-600 to-rose-500'
   }
+  return colors[category] || 'from-red-600 to-red-500' // Default fallback
+}
 
+function BlogCard({ post, featured = false }) {
   if (featured) {
-    return (
-      <motion.article
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="group relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 border-4 border-red-600 h-[500px]"
-      >
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent z-10"></div>
-        
-        {/* Content */}
-        <div className="relative z-20 h-full flex flex-col justify-end p-8">
-          <div className="flex items-center gap-3 mb-4">
-            <span className={`px-4 py-2 bg-gradient-to-r ${getCategoryColor(post.category)} text-white text-xs font-bold tracking-wide uppercase`}>
-              Featured
-            </span>
-            <span className="px-4 py-2 bg-white/10 backdrop-blur-sm text-white text-xs font-bold tracking-wide uppercase">
-              {post.category}
-            </span>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 group-hover:text-red-600 transition-colors">
-            {post.title}
-          </h2>
-
-          <p className="text-lg text-gray-300 mb-6 leading-relaxed line-clamp-2">
-            {post.excerpt}
-          </p>
-
-          <div className="flex items-center gap-6 text-gray-400 text-sm mb-6">
-            <span className="flex items-center gap-2">
-              <FiCalendar className="w-4 h-4" />
-              {post.date}
-            </span>
-            <span className="flex items-center gap-2">
-              <FiClock className="w-4 h-4" />
-              {post.readTime}
-            </span>
-            <span className="flex items-center gap-2">
-              <FiEye className="w-4 h-4" />
-              {post.views}
-            </span>
-          </div>
-
-          <Link
-            to={`/blog/${post.slug}`}
-            className="inline-flex items-center gap-2 text-red-600 font-bold hover:gap-4 transition-all duration-300"
-          >
-            Read Article
-            <FiArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </motion.article>
-    )
-  }
-
-  if (variant === 'minimal') {
     return (
       <motion.article
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
         viewport={{ once: true }}
-        className="group border-b-2 border-gray-200 pb-6 hover:border-red-600 transition-all duration-300"
+        className="group relative grid md:grid-cols-2 gap-8 items-center bg-white rounded-3xl p-6 border border-gray-100 shadow-xl hover:shadow-2xl transition-all duration-300"
       >
-        <div className="flex items-start gap-4">
-          <span className={`px-3 py-1 bg-gradient-to-r ${getCategoryColor(post.category)} text-white text-xs font-bold uppercase flex-shrink-0`}>
-            {post.category}
-          </span>
-          <div className="flex-1">
-            <Link to={`/blog/${post.slug}`}>
-              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
-                {post.title}
-              </h3>
-            </Link>
-            <div className="flex items-center gap-4 text-gray-600 text-sm">
-              <span className="flex items-center gap-1">
-                <FiCalendar className="w-3 h-3" />
-                {post.date}
-              </span>
-              <span className="flex items-center gap-1">
-                <FiClock className="w-3 h-3" />
-                {post.readTime}
-              </span>
+        <div className="relative aspect-video md:aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800">
+          <div className={`absolute inset-0 bg-gradient-to-br ${getCategoryColor(post.category)} opacity-20`}></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className={`text-9xl font-black text-white/10 bg-gradient-to-r ${getCategoryColor(post.category)} bg-clip-text text-transparent`}>
+              {post.category.substring(0, 2).toUpperCase()}
             </div>
+          </div>
+          <span className="absolute top-4 left-4 px-4 py-1 bg-red-600 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
+            Featured
+          </span>
+        </div>
+
+        <div className="md:pr-8">
+          <div className="flex items-center gap-3 text-sm text-gray-500 mb-4 font-medium">
+            <span className="text-red-600 font-bold uppercase tracking-wider">{post.category}</span>
+            <span>•</span>
+            <span>{post.date}</span>
+          </div>
+
+          <h3 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-[length:200%_auto] group-hover:bg-right transition-all duration-500">
+            <Link to={`/blog/${post.slug}`}>
+              {post.title}
+            </Link>
+          </h3>
+
+          <p className="text-gray-600 mb-6 line-clamp-3 text-lg leading-relaxed">
+            {post.excerpt}
+          </p>
+
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4 text-sm font-medium text-gray-500">
+              <div className="flex items-center gap-1.5">
+                <FiClock className="w-4 h-4" />
+                {post.readTime}
+              </div>
+              <div className="flex items-center gap-1.5">
+                <FiEye className="w-4 h-4" />
+                {post.views}
+              </div>
+            </div>
+
+            <Link
+              to={`/blog/${post.slug}`}
+              className="inline-flex items-center gap-2 text-red-600 font-bold hover:gap-3 transition-all"
+            >
+              Read Article <FiArrowRight />
+            </Link>
           </div>
         </div>
       </motion.article>
     )
   }
 
-  // Default card
   return (
     <motion.article
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="group bg-white border-2 border-gray-200 hover:border-red-600 transition-all duration-300 overflow-hidden flex flex-col h-full"
+      className="group bg-white border-2 border-gray-200 hover:border-red-600 transition-all duration-300 overflow-hidden flex flex-col h-full rounded-2xl"
     >
       {/* Category Badge */}
       <div className={`h-2 bg-gradient-to-r ${getCategoryColor(post.category)}`}></div>
@@ -128,7 +94,7 @@ function BlogCard({ post, featured = false, variant = 'default' }) {
           </div>
         </div>
         <div className="absolute top-4 left-4">
-          <span className={`px-3 py-1 bg-gradient-to-r ${getCategoryColor(post.category)} text-white text-xs font-bold tracking-wide uppercase`}>
+          <span className={`px-3 py-1 bg-gradient-to-r ${getCategoryColor(post.category)} text-white text-xs font-bold tracking-wide uppercase rounded-full shadow-sm`}>
             {post.category}
           </span>
         </div>
@@ -156,7 +122,7 @@ function BlogCard({ post, featured = false, variant = 'default' }) {
           </h3>
         </Link>
 
-        <p className="text-gray-600 leading-relaxed mb-4 font-medium line-clamp-3 flex-1">
+        <p className="text-gray-600 leading-relaxed mb-4 font-medium line-clamp-3 line-clamp-3">
           {post.excerpt}
         </p>
 
@@ -166,7 +132,7 @@ function BlogCard({ post, featured = false, variant = 'default' }) {
             {post.tags.slice(0, 3).map((tag, index) => (
               <span
                 key={index}
-                className="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 border border-gray-300 text-xs font-medium text-gray-700"
+                className="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 border border-gray-200 rounded-md text-xs font-medium text-gray-600"
               >
                 <FiTag className="w-3 h-3" />
                 {tag}
@@ -175,13 +141,15 @@ function BlogCard({ post, featured = false, variant = 'default' }) {
           </div>
         )}
 
-        <Link
-          to={`/blog/${post.slug}`}
-          className="inline-flex items-center gap-2 text-red-600 font-bold hover:gap-4 transition-all duration-300 mt-auto"
-        >
-          Read More
-          <FiArrowRight className="w-4 h-4" />
-        </Link>
+        <div className="mt-auto">
+          <Link
+            to={`/blog/${post.slug}`}
+            className="inline-flex items-center gap-2 text-red-600 font-bold hover:gap-4 transition-all duration-300"
+          >
+            Read More
+            <FiArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </motion.article>
   )
