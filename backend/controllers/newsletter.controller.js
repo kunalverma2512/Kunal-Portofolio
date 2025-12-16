@@ -70,27 +70,20 @@ export const subscribeNewsletter = async (req, res) => {
 
         await subscriber.save();
 
-        // Send email notifications
-        try {
-            // 1. Send Admin Notification
-            await sendNewsletterNotification({
+        // Send email notifications (Async - don't await)
+        Promise.allSettled([
+            sendNewsletterNotification({
                 email: subscriber.email,
                 source: subscriber.source,
                 subscribedAt: subscriber.subscribedAt,
                 ipAddress: subscriber.ipAddress
-            }, 'ADMIN');
-            console.log('Admin notification sent');
-
-            // 2. Send Welcome Email to User
-            await sendNewsletterNotification({
+            }, 'ADMIN'),
+            sendNewsletterNotification({
                 email: subscriber.email
-            }, 'WELCOME');
-            console.log('Welcome email sent to user');
+            }, 'WELCOME')
+        ]).catch(err => console.error('Background email sending failed:', err));
 
-        } catch (emailError) {
-            console.error('Failed to send email notifications:', emailError);
-            // Don't fail the request if email fails
-        }
+        console.log('Email notifications triggered in background');
 
         res.status(201).json({
             success: true,
