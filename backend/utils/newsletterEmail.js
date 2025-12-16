@@ -14,13 +14,17 @@ const sendNewsletterNotification = async (options, type = 'ADMIN') => {
 
   // Create transporter
   const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    service: 'gmail', // Use service 'gmail' for built-in optimized settings
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
-    }
+    },
+    // Fix for Render/Gmail IPv6 issues
+    family: 4,
+    // Robust connection settings
+    pool: true, // Use pooled connections
+    maxConnections: 1, // Limit max connections
+    rateLimit: 1 // Limit rate to avoid blocking
   });
 
   let subject = '';
