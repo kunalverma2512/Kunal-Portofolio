@@ -7,8 +7,11 @@ import nodemailer from 'nodemailer';
  */
 const sendNewsletterNotification = async (options, type = 'ADMIN') => {
   // Check for credentials
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.error('CRITICAL: EMAIL_USER or EMAIL_PASS is missing in .env file');
+  const emailUser = process.env.GMAIL_USER;
+  const emailPass = process.env.GMAIL_APP_PASSWORD;
+
+  if (!emailUser || !emailPass) {
+    console.error('CRITICAL: GMAIL_USER or GMAIL_APP_PASSWORD is missing in .env file');
     throw new Error('Email credentials missing');
   }
 
@@ -16,8 +19,8 @@ const sendNewsletterNotification = async (options, type = 'ADMIN') => {
   const transporter = nodemailer.createTransport({
     service: 'gmail', // Use service 'gmail' for built-in optimized settings
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD
     },
     // Fix for Render/Gmail IPv6 issues
     family: 4,
@@ -69,8 +72,16 @@ const sendNewsletterNotification = async (options, type = 'ADMIN') => {
   `;
 
   if (type === 'ADMIN') {
-    recipient = process.env.EMAIL_USER;
+    recipient = process.env.GMAIL_USER;
     subject = '📧 New Newsletter Subscription';
+    // ... (content omitted for brevity, only showing changes)
+    // Define email options
+    const mailOptions = {
+      from: `"Kunal Verma" <${process.env.GMAIL_USER}>`,
+      to: recipient,
+      subject: subject,
+      html: htmlContent
+    };
     htmlContent = `
       <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html xmlns="http://www.w3.org/1999/xhtml">
@@ -260,7 +271,7 @@ const sendNewsletterNotification = async (options, type = 'ADMIN') => {
 
   // Define email options
   const mailOptions = {
-    from: `"Kunal Verma" <${process.env.EMAIL_USER}>`,
+    from: `"Kunal Verma" <${process.env.GMAIL_USER}>`,
     to: recipient,
     subject: subject,
     html: htmlContent

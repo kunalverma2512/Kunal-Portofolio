@@ -2,28 +2,24 @@ import nodemailer from 'nodemailer';
 
 const sendEmail = async (options) => {
   // Check for credentials
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.error('CRITICAL: EMAIL_USER or EMAIL_PASS is missing in .env file');
-    console.error('EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'Missing');
-    console.error('EMAIL_PASS:', process.env.EMAIL_PASS ? 'Set' : 'Missing');
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    console.error('CRITICAL: GMAIL_USER or GMAIL_APP_PASSWORD is missing in .env file');
     throw new Error('Email credentials missing');
   }
 
   // Create transporter
   const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465, // Use 465 for SSL, 587 for TLS
-    secure: true, // true for 465, false for other ports
+    service: 'gmail',
     auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD
     }
   });
 
   // Define email options
   const mailOptions = {
-    from: `"${options.name}" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER,
+    from: `"${options.name}" <${process.env.GMAIL_USER}>`,
+    to: process.env.GMAIL_USER,
     replyTo: options.email,
     subject: `🚀 Portfolio Contact: ${options.subject}`,
     html: `
