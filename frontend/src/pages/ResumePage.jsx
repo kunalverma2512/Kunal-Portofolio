@@ -315,7 +315,7 @@ function ResumePage() {
                   <ul className="list-disc list-inside text-gray-400 text-sm space-y-2 mb-4 print:text-gray-700">
                     <li>Developed a browser-based anti-spoofing system using <span className="text-gray-300 font-bold print:text-black">MediaPipe & TensorFlow.js</span>.</li>
                     <li>Achieved sub-2-second verification time by processing facial landmarks purely on the client side.</li>
-                    <li>Secured <span className="text-red-500 font-bold print:text-red-700">1st Rank (Winner)</span> in Smart India Hackathon 2025 (National Level).</li>
+                    <li>Secured <span className="text-red-500 font-bold print:text-red-700">4th Rank</span> in Internal Hackathon (Smart India Hackathon 2024).</li>
                   </ul>
                   <div className="flex flex-wrap gap-2 text-xs font-bold text-gray-500">
                     <span className="px-2 py-1 bg-white/5 rounded print:border print:border-gray-200">Computer Vision</span>

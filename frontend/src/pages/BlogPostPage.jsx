@@ -279,7 +279,7 @@ function BlogPostPage() {
 
               <h3 className="text-2xl font-black mb-3 relative z-10">Subscribe</h3>
               <p className="text-gray-400 text-sm mb-6 relative z-10 leading-relaxed">
-                Join 15k+ developers. Get the latest insights delivered to your inbox weekly.
+                Join the community. Get the latest insights delivered to your inbox weekly.
               </p>
 
               <form onSubmit={handleSubscribe} className="relative z-10 space-y-3">
